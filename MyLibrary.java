@@ -25,32 +25,28 @@ public class MyLibrary {
 	 * main method
 	 */
 	public static void main(String[] args) {
+		
+		// instantiate objects (controller? model? collection?) 
+		LibraryModel model = new LibraryModel;
+		LibraryController controller = new LibraryController(model);
+		
+		execute();
 
-		// instantiate objects (controller? model? collection?)
-
-		
-		// loop while no exit command
-		String status = "start";
-		//while (!status.equals("exit")) {
-			
-			//status = scanCommand(); 
-			//executeCommand(status);
-			
-		//}
-		
-		
-		
-		
-		
-		
-		//call exit method
-		
-		
-		
-		
+		// print exit message?
 	}
 	
-	
+
+
+	private static void execute(LibraryController controller, LibraryModel model) {
+
+		String status = "start";
+		while (!status.equals("exit")) {
+			
+			status = scanCommand(); 
+			executeCommand(status);
+			
+		}		
+	}
 	
 	
 	
@@ -67,28 +63,7 @@ public class MyLibrary {
 	 * returns: users keyboard input string
 	 */
 	private static String scanCommand() {
-		Scanner inputScanner = new Scanner(System.in);
-
-		String command = inputScanner.next(); // check that input exists here?
-		switch (command) {
-			case "search":
-				// do something
-				break;
-			case "addBook":
-				break;
-			case "setToRead":
-				break;
-			case "rate":
-				break;
-			case "getBooks":
-				break;
-			case "suggestRead":
-				break;
-			case "addBooks":
-				break;
-
-		}
-
+		
 		return "str";		// just so I'm not getting an error
 	}
 	
@@ -113,11 +88,36 @@ public class MyLibrary {
 	 * 
 	 * returns: void
 	 */
-	private static void executeCommand(String command) {
+	public static void executeCommand(LibraryController controller, String command) {
 		
 		// decipher command here and have different controller methods for each?
 		// or, pass the string to the controller and decipher there?  (i think this one so we can delete this method)
+	
 		
+		// *add parameters for certain methods*
+		switch (command) {
+		case "search":
+			controller.search();
+		break;
+		case "addBook":
+			controller.addBook();
+		break;
+		case "setToRead":
+			controller.setToRead();
+		break; 
+		case "rate":
+			controller.rate();
+		break;
+		case "getBooks":
+			controller.getBooks();
+		break;
+		case "suggestRead":
+			controller.suggestRead();
+		break;
+		case "addBooks":
+			controller.addBooks();
+		break;
+		}
 	}
 	
 	
