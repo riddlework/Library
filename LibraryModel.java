@@ -2,7 +2,6 @@ import java.util.Random;
 import java.util.*;
 
 
-
 /*
  * Author(s):
  * File:
@@ -11,20 +10,18 @@ import java.util.*;
  */
 
 
-public class Collection {
+public class LibraryModel {
 
 	ArrayList<Book> books;
 
 	// instance variables
 	
-	
-	
-	
+
 	
 	/*
 	 * constructor
 	 */
-	public Collection() {
+	public LibraryModel() {
 		
 	}
 	

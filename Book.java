@@ -6,29 +6,30 @@
  */
 
 
+import java.util.Optional;
+
 public class Book {
 
 	// instance variables
 	private String title;
 	private String author;
-	private int rating;
-	private boolean read;		// false if not read, true if already read
-	
-	
-	
+	private Optional<Integer> rating;
+	private Optional<Boolean> isRead; // false if not read, true if already read
+
 	/*
 	 * constructor
 	 */
-	public Book(String title, String author, int rating, boolean read) {
-		
+	public Book(String title, String author, Optional<Integer> rating, Optional<Boolean> isRead) {
 		this.title = title;
 		this.author = author;
-		this.rating = rating;
-		this.read = read;
-		
+
+		this.rating = rating.isPresent() ? rating : Optional.empty();
+		this.isRead = isRead.isPresent() ? isRead : Optional.empty();
 	}
-	
-	
+
+
+
+
 	
 	
 	

@@ -25,10 +25,9 @@ public class MyLibrary {
 	 * main method
 	 */
 	public static void main(String[] args) {
-		
-		// instantiate objects (controller? model? collection?) 
-		
-		
+
+		// instantiate objects (controller? model? collection?)
+
 		
 		// loop while no exit command
 		String status = "start";
@@ -68,7 +67,28 @@ public class MyLibrary {
 	 * returns: users keyboard input string
 	 */
 	private static String scanCommand() {
-		
+		Scanner inputScanner = new Scanner(System.in);
+
+		String command = inputScanner.next(); // check that input exists here?
+		switch (command) {
+			case "search":
+				// do something
+				break;
+			case "addBook":
+				break;
+			case "setToRead":
+				break;
+			case "rate":
+				break;
+			case "getBooks":
+				break;
+			case "suggestRead":
+				break;
+			case "addBooks":
+				break;
+
+		}
+
 		return "str";		// just so I'm not getting an error
 	}
 	
