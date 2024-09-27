@@ -88,11 +88,36 @@ public class MyLibrary {
 	 * 
 	 * returns: void
 	 */
-	private static void executeCommand(String command) {
+	public static void executeCommand(LibraryController controller, String command) {
 		
 		// decipher command here and have different controller methods for each?
 		// or, pass the string to the controller and decipher there?  (i think this one so we can delete this method)
+	
 		
+		// *add parameters for certain methods*
+		switch (command) {
+		case "search":
+			controller.search();
+		break;
+		case "addBook":
+			controller.addBook();
+		break;
+		case "setToRead":
+			controller.setToRead();
+		break; 
+		case "rate":
+			controller.rate();
+		break;
+		case "getBooks":
+			controller.getBooks();
+		break;
+		case "suggestRead":
+			controller.suggestRead();
+		break;
+		case "addBooks":
+			controller.addBooks();
+		break;
+		}
 	}
 	
 	
