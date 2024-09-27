@@ -89,7 +89,7 @@ public class MyLibrary {
 	 * 
 	 * returns: void
 	 */
-	public static void executeCommand(String command) {
+	private static void executeCommand(String command) {
 		
 		// decipher command here and have different controller methods for each?
 		// or, pass the string to the controller and decipher there?  (i think this one so we can delete this method)
@@ -112,16 +112,14 @@ public class MyLibrary {
 	 * 
 	 * returns: void
 	 */
-	public static void printCommand(String command) {
+	private static void printCommand(String command) {
 		
 	}
 	
 	
 	
-	
-	
-	private static void testPriv() {
-		System.out.println("test");
+	private static void exit() {
+
 	}
 	
 	
