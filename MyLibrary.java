@@ -27,31 +27,26 @@ public class MyLibrary {
 	public static void main(String[] args) {
 		
 		// instantiate objects (controller? model? collection?) 
+		LibraryModel model = new LibraryModel;
+		LibraryController controller = new LibraryController(model);
 		
-		
-		
-		// loop while no exit command
-		String status = "start";
-		//while (!status.equals("exit")) {
-			
-			//status = scanCommand(); 
-			//executeCommand(status);
-			
-		//}
-		
-		
-		
-		
-		
-		
-		//call exit method
-		
-		
-		
-		
+		execute();
+
+		// print exit message?
 	}
 	
-	
+
+
+	private static void execute(LibraryController controller, LibraryModel model) {
+
+		String status = "start";
+		while (!status.equals("exit")) {
+			
+			status = scanCommand(); 
+			executeCommand(status);
+			
+		}		
+	}
 	
 	
 	
