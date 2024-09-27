@@ -27,17 +27,17 @@ public class MyLibrary {
 	public static void main(String[] args) {
 		
 		// instantiate objects (controller? model? collection?) 
-		LibraryModel model = new LibraryModel;
+		LibraryModel model = new LibraryModel();
 		LibraryController controller = new LibraryController(model);
 		
-		execute();
+		execute(controller);
 
 		// print exit message?
 	}
 	
 
 
-	private static void execute(LibraryController controller, LibraryModel model) {
+	private static void execute(LibraryController controller) {
 
 		String status = "start";
 		while (!status.equals("exit")) {
