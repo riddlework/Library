@@ -9,10 +9,10 @@
 public class Book {
 
 	// instance variables
-	String title;
-	String author;
-	int rating;
-	boolean read;		// false if not read, true if already read
+	private String title;
+	private String author;
+	private int rating;
+	private boolean read;		// false if not read, true if already read
 	
 	
 	

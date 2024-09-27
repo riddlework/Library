@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.*;
 
 
 
@@ -11,6 +12,8 @@ import java.util.Random;
 
 
 public class Collection {
+
+	ArrayList<Book> books;
 
 	// instance variables
 	
