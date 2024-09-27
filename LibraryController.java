@@ -8,14 +8,12 @@
 
 public class LibraryController {
 
-	private LibraryModel; 
+	private LibraryModel model;
 
 
 
 	
-	public LibraryController(LibraryModel model) 
-		this.model = model;
-	}
+	public LibraryController(LibraryModel model) { this.model = model; }
 
 
 
