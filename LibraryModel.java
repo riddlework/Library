@@ -11,19 +11,16 @@ import java.util.*;
 
 
 public class LibraryModel {
-
+	// instance variables
 	ArrayList<Book> books;
 
-	// instance variables
-	
+
 
 	
 	/*
 	 * constructor
 	 */
-	public LibraryModel() {
-		
-	}
+	public LibraryModel() { books = new ArrayList<>(); }
 	
 	
 	
@@ -47,13 +44,11 @@ public class LibraryModel {
 	 * 
 	 * *going to need parameters to create book*
 	 */
-	public void addBook() {
-		
-		// Book(title, author, rating)
-		// add to collection
+	public void addBook(String title, String author, boolean isRead, int rating) {
+		Book book = new Book(title, author, isRead, rating);
+		this.books.add(book);
 	}
-	
-	
+
 	
 	
 	
@@ -62,10 +57,15 @@ public class LibraryModel {
 	 * 
 	 * *going to need parameters to find book*
 	 */
-	public void setToRead() {
-		
-		// 
-		
+	public void setToRead(Book bookToUpdate) {
+		for (Book book: this.books) {
+			String title = book.getTitle();
+			String titleToUpdate = bookToUpdate.getTitle();
+			if (title.equals(titleToUpdate)) {
+				book.updateRead();
+				break;
+			}
+		}
 	}
 	
 	
@@ -77,8 +77,9 @@ public class LibraryModel {
 	 * 
 	 * * going to need parameters to find book*
 	 */
-	public void rate() {
-		
+	public void rate(Book bookToUpdate, int rating) {
+
+
 		// book.updateRating()
 	}
 	

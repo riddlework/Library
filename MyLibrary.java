@@ -39,7 +39,7 @@ public class MyLibrary {
 	 * 
 	 * returns: void
 	 */
-	public static boolean handleCommand(LibraryController controller, Scanner inputScanner) {
+	private static boolean handleCommand(LibraryController controller, Scanner inputScanner) {
 		
 		// decipher command here and have different controller methods for each?
 		// or, pass the string to the controller and decipher there?  (i think this one so we can delete this method)
@@ -49,7 +49,7 @@ public class MyLibrary {
 		// *add parameters for certain methods*
 		switch (command) {
 			case "search":
-				controller.search();
+				search();
 				break;
 			case "setToRead":
 				controller.setToRead();
@@ -71,6 +71,24 @@ public class MyLibrary {
 			case "exit":
 				return false;
 		} return true;
+	}
+
+	private static void search(LibraryController controller, Scanner inputScanner) {
+		System.out.println("Would you like to search by title, author, or rating?");
+		String searchMethod = inputScanner.nextLine();
+		// input validation on searchMethod
+		switch (searchMethod) {
+			case "rating":
+				System.out.print("Input the rating you're looking for: ");
+				int searchArg = inputScanner.nextInt();
+				controller.search(searchMethod,searchArg);
+			case "title":
+				System.out.print("Input the title of the book you're looking for: ");
+				break;
+			case "author":
+				System.out.print("Input the author you're looking for: ");
+				break;
+		}
 	}
 
 	
