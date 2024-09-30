@@ -13,24 +13,28 @@ public class Book {
 	// instance variables
 	private String title;
 	private String author;
-	private Optional<Integer> rating;
-	private Optional<Boolean> isRead; // false if not read, true if already read
+	private boolean isRead; // false if not read, true if already read
+	private int rating;
 
 	/*
 	 * constructor
 	 */
-	public Book(String title, String author, Optional<Integer> rating, Optional<Boolean> isRead) {
+	public Book(String title, String author, boolean isRead, int rating) {
 		this.title = title;
 		this.author = author;
+		this.isRead = isRead;
+		this.rating = rating;
+	}
 
-		this.rating = rating.isPresent() ? rating : Optional.empty();
-		this.isRead = isRead.isPresent() ? isRead : Optional.empty();
+	public Book(String title, String author) {
+		this.title = title;
+		this.author = author;
+		this.isRead = false;
+		this.rating = 0;
 	}
 
 
 
-
-	
 	
 	
 	/*
