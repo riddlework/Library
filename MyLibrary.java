@@ -41,32 +41,14 @@ public class MyLibrary {
 
 		String status = "start";
 		Scanner inputScanner = new Scanner();
-		while (!status.equals("exit")) {
-			
-			status = scanCommand(); 
-			executeCommand(status, inputScanner);
-			
-		}		
-	}
-	
-	
-	
-	
-	
-	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		boolean stauts = true;
+		while (status) {
+			status = handleCommand(controller, inputScanner);
+		}	
+
+		inputScanner.close();
+	}
 	
 	
 	
@@ -79,15 +61,17 @@ public class MyLibrary {
 	 * 
 	 * returns: void
 	 */
-	public static void handleCommand(LibraryController controller, String command) {
+	public static void handleCommand(LibraryController controller, Scanner inputScanner) {
 		
 		// decipher command here and have different controller methods for each?
 		// or, pass the string to the controller and decipher there?  (i think this one so we can delete this method)
-
-		Scanner scan = new Scanner(System.in);
-		System.out.println("");
-	    	String commandInput = scan.nextLine();
 		
+		System.out.println("");
+	    	String commandInput = inputScanner.nextLine();
+
+
+		// validate input string
+
 		
 		// *add parameters for certain methods*
 		switch (command) {
@@ -112,6 +96,9 @@ public class MyLibrary {
 		case "addBooks":
 			controller.addBooks();
 		break;
+		case "exit":
+			return false;	
+		break;	
 		}
 	}
 	
@@ -137,11 +124,6 @@ public class MyLibrary {
 	
 	
 	
-	private static void exit() {
-
-	}
-	
-	
 	
 	
 	
@@ -153,7 +135,3 @@ public class MyLibrary {
 	
 }
 
-
-enum Command {
-
-}
