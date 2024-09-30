@@ -31,15 +31,48 @@ public class LibraryModel {
 	 * 
 	 * *going to need parameters to find books that have common factors*
 	 */
-	public void chooseSearch() {
+	public void chooseSearch(String searchMethod, String searchArg) {
 		
+		switch(searchMethod) {
+		case "title":
+			searchTitle(searchArg);
+		break;
+		case "author":
+			searchAuthor(searchArg);
+		break;
+		}
 	}
+	
 
 	private Book searchTitle(String title) throws NoSuchBookException {
 		// TODO: catch exception in the view
 		for (Book book : this.books)
 			if (book.getTitle().equals(title)) return book;
 		throw new NoSuchBookException("No such book exists.");
+	}
+
+	private ArrayList<Book> searchAuthor(String author) {
+
+		ArrayList<Book> retList = new ArrayList<>();
+		for (Book book : this.books) {
+			if (book.getAuthor().equals(author)) {
+				retList.add(book);
+			}
+		}
+		
+		return retList;
+	}
+	
+	private ArrayList<Book> searchRating(int rating) {
+
+		ArrayList<Book> retList = new ArrayList<>();
+		for (Book book : this.books) {
+			if (book.getRating() == rating) {
+				retList.add(book);
+			}
+		}
+		
+		return retList;
 	}
 	
 	
