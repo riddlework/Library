@@ -36,6 +36,7 @@ public class LibraryModel {
 	}
 
 	private Book searchTitle(String title) throws NoSuchBookException {
+		// TODO: catch exception in the view
 		for (Book book : this.books)
 			if (book.getTitle().equals(title)) return book;
 		throw new NoSuchBookException("No such book exists.");
@@ -62,36 +63,24 @@ public class LibraryModel {
 	 * 
 	 * *going to need parameters to find book*
 	 */
-	public void setToRead(Book bookToUpdate) {
-		for (Book book: this.books) {
-			String title = book.getTitle();
-			String titleToUpdate = bookToUpdate.getTitle();
-			if (title.equals(titleToUpdate)) {
-				book.updateRead();
-				break;
-			}
-		}
+	public void setToRead(String title) throws NoSuchBookException {
+		Book bookToUpdate = searchTitle(title);
+		bookToUpdate.updateRead();
 	}
+
 	
-	
-	
-	
-	
+
 	/*
 	 * edit the integer 1-5 rating of the book
 	 * 
 	 * * going to need parameters to find book*
 	 */
-	public void rate(Book bookToUpdate, int rating) {
-
-
-		// book.updateRating()
+	public void rate(String title, int rating) throws NoSuchBookException {
+		Book bookToUpdate = searchTitle(title);
+		bookToUpdate.updateRating(rating);
 	}
-	
-	
-	
-	
-	
+
+
 	/*
 	 * return entire collection of books given a specific return criteria
 	 * 
@@ -102,7 +91,7 @@ public class LibraryModel {
 	 * *going to need parameter to decipher return format*
 	 */
 	public void getBooks() {
-		
+
 	}
 	
 	
