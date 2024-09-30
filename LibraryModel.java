@@ -31,9 +31,18 @@ public class LibraryModel {
 	 * 
 	 * *going to need parameters to find books that have common factors*
 	 */
-	public void chooseSearch() {
+	public void chooseSearch(String searchMethod, String searchArg) {
 		
+		switch(searchMethod) {
+		case "title":
+			searchTitle(searchArg);
+		break;
+		case "author":
+			searchAuthor(searchArg);
+		break;
+		}
 	}
+	
 
 	private Book searchTitle(String title) throws NoSuchBookException {
 		for (Book book : this.books)
