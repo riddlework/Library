@@ -31,10 +31,18 @@ public class LibraryModel {
 	 * 
 	 * *going to need parameters to find books that have common factors*
 	 */
-	public void search() {
+	public void chooseSearch() {
 		
 	}
-	
+
+	private Book searchTitle(String title) {
+
+		for (Book book : this.books) {
+			if (book.title.equals(title)) {
+				return book;
+			}
+		}
+	}
 	
 	
 	
