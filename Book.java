@@ -33,29 +33,15 @@ public class Book {
 		this.rating = 0;
 	}
 
-
-
-	
-	
 	/*
 	 * updates the book rating based off user input
 	 */
-	public void updateRating(int rating) {
-		
-		this.rating = rating;
-	}
-	
-	
-	
-	
+	public void updateRating(int rating) { this.rating = rating; }
 	
 	/*
 	 * updates the book read status  
 	 */
-	public void updateRead() {
-		
-		read = true;
-	}
+	public void updateRead() { this.isRead = true; }
 	
 	
 	
