@@ -40,6 +40,30 @@ public class LibraryModel {
 			if (book.getTitle().equals(title)) return book;
 		throw new NoSuchBookException("No such book exists.");
 	}
+
+	private ArrayList<Book> searchAuthor(String author) {
+
+		ArrayList<Book> retList = new ArrayList<>();
+		for (Book book : this.books) {
+			if (book.getAuthor().equals(author)) {
+				retList.add(book);
+			}
+		}
+		
+		return retList;
+	}
+	
+	private ArrayList<Book> searchRating(int rating) {
+
+		ArrayList<Book> retList = new ArrayList<>();
+		for (Book book : this.books) {
+			if (book.getRating() == rating) {
+				retList.add(book);
+			}
+		}
+		
+		return retList;
+	}
 	
 	
 	
