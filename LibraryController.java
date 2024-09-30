@@ -16,11 +16,17 @@ public class LibraryController {
 	public LibraryController(LibraryModel model) { this.model = model; }
 
 
+	
+	public void search(int rating) {
+		model.search(rating);		
+	} 
 
-
-	public void search() {
-		model.search();		
+	
+	public void search(String searchMethod, String searchArg) {
+		model.search(searchMethod, searchArg);
 	}
+	
+	
 
 	public void addBook() {
 		model.addBook();
@@ -30,6 +36,7 @@ public class LibraryController {
 		model.setToRead();	
 	}
 
+	// do input validation here
 	public void rate() {
 		model.rate();
 	}
