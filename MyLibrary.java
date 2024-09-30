@@ -40,10 +40,11 @@ public class MyLibrary {
 	private static void execute(LibraryController controller) {
 
 		String status = "start";
+		Scanner inputScanner = new Scanner();
 		while (!status.equals("exit")) {
 			
 			status = scanCommand(); 
-			executeCommand(status);
+			executeCommand(status, inputScanner);
 			
 		}		
 	}
@@ -55,17 +56,7 @@ public class MyLibrary {
 	
 
 	
-	/*
-	 * This method is called with each repetition of the main() loop to get the next command. 
-	 * We use a scanner to get the keyboard input and pass it to the proper command method call.
-	 * 
-	 * parameters: none
-	 * returns: users keyboard input string
-	 */
-	private static String scanCommand() {
-		
-		return "str";		// just so I'm not getting an error
-	}
+	
 	
 	
 	
@@ -88,11 +79,15 @@ public class MyLibrary {
 	 * 
 	 * returns: void
 	 */
-	public static void executeCommand(LibraryController controller, String command) {
+	public static void handleCommand(LibraryController controller, String command) {
 		
 		// decipher command here and have different controller methods for each?
 		// or, pass the string to the controller and decipher there?  (i think this one so we can delete this method)
-	
+
+		Scanner scan = new Scanner(System.in);
+		System.out.println("");
+	    	String commandInput = scan.nextLine();
+		
 		
 		// *add parameters for certain methods*
 		switch (command) {
@@ -156,4 +151,9 @@ public class MyLibrary {
 	
 	
 	
+}
+
+
+enum Command {
+
 }
