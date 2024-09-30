@@ -35,13 +35,10 @@ public class LibraryModel {
 		
 	}
 
-	private Book searchTitle(String title) {
-
-		for (Book book : this.books) {
-			if (book.title.equals(title)) {
-				return book;
-			}
-		}
+	private Book searchTitle(String title) throws NoSuchBookException {
+		for (Book book : this.books)
+			if (book.getTitle().equals(title)) return book;
+		throw new NoSuchBookException("No such book exists.");
 	}
 	
 	
@@ -137,4 +134,12 @@ public class LibraryModel {
 	}
 	
 	
+}
+
+class NoSuchBookException extends Exception {
+
+	// constructor that accepts a message
+	public NoSuchBookException(String message) {
+		super(message);
+	}
 }
