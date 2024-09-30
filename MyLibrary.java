@@ -18,56 +18,16 @@ import java.util.Scanner;
 
 public class MyLibrary {
 
-	
-	
-	
-	/*
-	 * main method
-	 */
-	public static void main(String[] args) {
-		
-		// instantiate objects (controller? model? collection?) 
-		LibraryModel model = new LibraryModel();
-		LibraryController controller = new LibraryController(model);
-		
-		execute(controller);
-
-		// print exit message?
-	}
-	
-
 
 	private static void execute(LibraryController controller) {
-
-		String status = "start";
-		Scanner inputScanner = new Scanner();
-		while (!status.equals("exit")) {
-			
-			status = scanCommand(); 
-			executeCommand(status, inputScanner);
-			
-		}		
+		boolean status = true;
+		Scanner inputScanner = new Scanner(System.in);
+		while (status) status = handleCommand(controller, inputScanner);
 	}
 	
 	
 	
-	
-	
-	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	/*
@@ -79,48 +39,40 @@ public class MyLibrary {
 	 * 
 	 * returns: void
 	 */
-	public static void handleCommand(LibraryController controller, String command) {
+	public static boolean handleCommand(LibraryController controller, Scanner inputScanner) {
 		
 		// decipher command here and have different controller methods for each?
 		// or, pass the string to the controller and decipher there?  (i think this one so we can delete this method)
 
-		Scanner scan = new Scanner(System.in);
-		System.out.println("");
-	    	String commandInput = scan.nextLine();
-		
-		
+		String command = inputScanner.nextLine();
+
 		// *add parameters for certain methods*
 		switch (command) {
-		case "search":
-			controller.search();
-		break;
-		case "addBook":
-			controller.addBook();
-		break;
-		case "setToRead":
-			controller.setToRead();
-		break; 
-		case "rate":
-			controller.rate();
-		break;
-		case "getBooks":
-			controller.getBooks();
-		break;
-		case "suggestRead":
-			controller.suggestRead();
-		break;
-		case "addBooks":
-			controller.addBooks();
-		break;
-		}
+			case "search":
+				controller.search();
+				break;
+			case "setToRead":
+				controller.setToRead();
+				break;
+			case "rate":
+				controller.rate();
+				break;
+			case "getBooks":
+				controller.getBooks();
+				break;
+			case "suggestRead":
+				controller.suggestRead();
+				break;
+			case "addBooks":
+				controller.addBooks();
+				break;
+			case "help":
+				break;
+			case "exit":
+				return false;
+		} return true;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	
 	/*
 	 * The purpose of this method is to print a message to the user when they provide a keyboard input.
@@ -135,25 +87,21 @@ public class MyLibrary {
 		
 	}
 	
-	
-	
-	private static void exit() {
+	/*
+	 * main method
+	 */
+	public static void main(String[] args) {
 
+		// instantiate objects (controller? model? collection?)
+		LibraryModel model = new LibraryModel();
+		LibraryController controller = new LibraryController(model);
+
+		execute(controller);
+
+		// print exit message?
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 }
 
 
-enum Command {
-
-}
