@@ -30,6 +30,8 @@ public class Book {
 
 	public String getAuthor() { return this.author; }
 
+	public int getRating() { return this.rating; }
+
 
 	/*
 	 * updates the book rating based off user input

@@ -31,15 +31,15 @@ public class LibraryModel {
 	 * 
 	 * *going to need parameters to find books that have common factors*
 	 */
-	public void chooseSearch(String searchMethod, String searchArg) {
+	public void chooseSearch(String searchMethod, String searchArg) throws NoSuchBookException,NoSuchAuthorException {
 		
 		switch(searchMethod) {
-		case "title":
-			searchTitle(searchArg);
-		break;
-		case "author":
-			searchAuthor(searchArg);
-		break;
+			case "title":
+				searchTitle(searchArg);
+				break;
+			case "author":
+				searchAuthor(searchArg);
+				break;
 		}
 	}
 	
@@ -48,31 +48,27 @@ public class LibraryModel {
 		// TODO: catch exception in the view
 		for (Book book : this.books)
 			if (book.getTitle().equals(title)) return book;
-		throw new NoSuchBookException("No such book exists.");
+		throw new NoSuchBookException("No such title exists.");
 	}
 
-	private ArrayList<Book> searchAuthor(String author) {
-
+	private ArrayList<Book> searchAuthor(String author) throws NoSuchBookException {
+		// TODO: catch exception in the view
 		ArrayList<Book> retList = new ArrayList<>();
-		for (Book book : this.books) {
-			if (book.getAuthor().equals(author)) {
-				retList.add(book);
-			}
-		}
-		
-		return retList;
+		for (Book book : this.books)
+			if (book.getAuthor().equals(author)) retList.add(book);
+
+		if (retList.isEmpty()) throw new NoSuchBookException("No such author exists.");
+		else return retList;
 	}
 	
-	private ArrayList<Book> searchRating(int rating) {
-
+	private ArrayList<Book> searchRating(int rating) throws NoSuchBookException {
+		// TODO: catch exception in the view
 		ArrayList<Book> retList = new ArrayList<>();
-		for (Book book : this.books) {
-			if (book.getRating() == rating) {
-				retList.add(book);
-			}
-		}
-		
-		return retList;
+		for (Book book : this.books)
+			if (book.getRating() == rating) retList.add(book);
+
+		if (retList.isEmpty()) throw new NoSuchBookException("No such rating exists.");
+		else return retList;
 	}
 	
 	
@@ -161,7 +157,8 @@ public class LibraryModel {
 class NoSuchBookException extends Exception {
 
 	// constructor that accepts a message
-	public NoSuchBookException(String message) {
+	public NoSuchBookException (String message) {
 		super(message);
 	}
 }
+
