@@ -6,6 +6,7 @@
  */
 import java.util.Random;
 import java.util.*;
+import java.util.Collections;
 
 
 public class LibraryModel {
@@ -115,6 +116,7 @@ public class LibraryModel {
 	 */
 	public ArrayList<Book> getBooks(String option) {
 		// TODO: deal with escaping references ?? ? ?
+		ArrayList<Book> booksToReturn = this.books;
 		switch (option) {
 			case "sortTitle":
 				sortTitle();
@@ -123,12 +125,18 @@ public class LibraryModel {
 				sortAuthor();
 				break;
 			case "readBooks":
-				return getReadBooks(true);
+				booksToReturn = getReadBooks(true);
+				break;
 			case "unreadBooks":
-				return getReadBooks(false);
+				booksToReturn = getReadBooks(false);
+				break;
 		}
 
-		return new ArrayList<>(this.books);
+		// make a copy to avoid escaping references and return
+		ArrayList<Book> booksToReturnCopy = new ArrayList<>();
+		for (Book book: booksToReturnCopy) {
+			booksToReturnCopy.add(new Book(book));
+		} return booksToReturnCopy;
 	}
 
 	// return all books that have been read

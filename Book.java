@@ -32,6 +32,13 @@ public class Book {
 		this.rating = 0;
 	}
 
+	public Book(Book book) {
+		this.title = book.title;
+		this.author = book.author;
+		this.isRead = book.isRead;
+		this.rating = book.rating;
+	}
+
 	// comparator nested classes in here?
 
 
