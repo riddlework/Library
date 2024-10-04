@@ -4,7 +4,6 @@
  * Course: CSC 335
  * Description: Implements the Model portion of the MVC design pattern
  */
-import java.util.Random;
 import java.util.*;
 import java.util.Collections;
 import java.io.*;
@@ -15,31 +14,11 @@ public class LibraryModel {
 	ArrayList<Book> books;
 
 
-
-	
 	/*
 	 * constructor
 	 */
 	public LibraryModel() { books = new ArrayList<>(); }
-	
 
-	
-	/*
-	 * find all books with a given search criteria
-	 * 
-	 * *going to need parameters to find books that have common factors*
-	 */
-	public ArrayList<retList> chooseSearch(String searchMethod, String searchArg) throws NoSuchBookException {
-		// TODO: catch exception in the view
-		
-		switch(searchMethod) {
-			case "title":
-				return searchTitle(searchArg);
-			case "author":
-				return searchAuthor(searchArg);
-		}
-	}
-	
 
 	private Book searchTitle(String title) throws NoSuchBookException {
 		for (Book book : this.books)
@@ -181,8 +160,7 @@ public class LibraryModel {
 		try {
 			//create scanner
 			Scanner scan = new Scanner(inputFile);
-			scan.useDelimiter(";");
-					
+
 			//instantiate necessary reading variables
 			String curLine = scan.nextLine();
 			String[] split;
