@@ -20,13 +20,13 @@ public class LibraryModel {
 	public LibraryModel() { books = new ArrayList<>(); }
 
 
-	private Book searchTitle(String title) throws NoSuchBookException {
+	public Book searchTitle(String title) throws NoSuchBookException {
 		for (Book book : this.books)
 			if (book.getTitle().equals(title)) return new Book(book);
 		throw new NoSuchBookException("No such title exists.");
 	}
 
-	private ArrayList<Book> searchAuthor(String author) throws NoSuchBookException {
+	public ArrayList<Book> searchAuthor(String author) throws NoSuchBookException {
 		ArrayList<Book> retList = new ArrayList<>();
 		for (Book book : this.books)
 			if (book.getAuthor().equals(author)) retList.add(new Book(book));
@@ -35,7 +35,7 @@ public class LibraryModel {
 		else return retList;
 	}
 	
-	private ArrayList<Book> searchRating(int rating) throws NoSuchBookException {
+	public ArrayList<Book> searchRating(int rating) throws NoSuchBookException {
 		ArrayList<Book> retList = new ArrayList<>();
 		for (Book book : this.books)
 			if (book.getRating() == rating) retList.add(new Book(book));
@@ -118,7 +118,7 @@ public class LibraryModel {
 	}
 
 	// return all books that have been read
-	public ArrayList<Book> getReadBooks(boolean wantsReadBooks) {
+	private ArrayList<Book> getReadBooks(boolean wantsReadBooks) {
 		ArrayList<Book> readBooks = new ArrayList<>();
 		ArrayList<Book> unreadBooks = new ArrayList<>();
 

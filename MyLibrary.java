@@ -18,17 +18,14 @@ import java.util.Scanner;
 
 public class MyLibrary {
 
+	private static LibraryController controller;
 
-	private static void execute(LibraryController controller) {
+
+	private static void execute() {
 		boolean status = true;
-		Scanner inputScanner = new Scanner(System.in);
-		while (status) status = handleCommand(controller, inputScanner);
+		while (status) status = handleCommand();
 	}
-	
-	
-	
 
-	
 	
 	/*
 	 * This method is called with each repetition of the main() loop to pass the users next command 
@@ -39,43 +36,53 @@ public class MyLibrary {
 	 * 
 	 * returns: void
 	 */
-	private static boolean handleCommand(LibraryController controller, Scanner inputScanner) {
+	private static boolean handleCommand() {
 		
 		// decipher command here and have different controller methods for each?
 		// or, pass the string to the controller and decipher there?  (i think this one so we can delete this method)
+
+		Scanner inputScanner = new Scanner(System.in);
+
+		System.out.print("Input a command, or type help for a list of valid commands: ");
 
 		String command = inputScanner.nextLine();
 
 		// *add parameters for certain methods*
 		switch (command) {
 			case "search":
-				search();
 				break;
 			case "setToRead":
-				controller.setToRead();
 				break;
 			case "rate":
-				controller.rate();
 				break;
 			case "getBooks":
-				controller.getBooks();
 				break;
 			case "suggestRead":
-				controller.suggestRead();
 				break;
 			case "addBooks":
-				controller.addBooks();
 				break;
 			case "help":
 				break;
 			case "exit":
 				return false;
+			default:
+				// if we get here, the command was incorrect
+				// do something valid
+				System.out.println("Please enter a valid command. Type help to show valid commands.");
+				break;
 		} return true;
+
 	}
 
-	private static void search(LibraryController controller, Scanner inputScanner) {
+	private static void search() {
+
+		// initialize input scanner
+		Scanner inputScanner = new Scanner(System.in);
+
+		// retrieve search method
 		System.out.println("Would you like to search by title, author, or rating?");
 		String searchMethod = inputScanner.nextLine();
+
 		// input validation on searchMethod
 		switch (searchMethod) {
 			case "rating":
@@ -88,6 +95,21 @@ public class MyLibrary {
 			case "author":
 				System.out.print("Input the author you're looking for: ");
 				break;
+			case default:
+				System.out.println("Your argument is invalid. Type help for a list of commands.");
+				search();
+				break;
+		}
+	}
+
+	private static boolean validateInput(String function) {
+		System.out.println("Please input a valid command. Type help to display a list of valid commands.");
+		switch (function) {
+			case "handleCommand":
+				handleCommand();
+				break;
+			case
+
 		}
 	}
 
@@ -112,9 +134,9 @@ public class MyLibrary {
 
 		// instantiate objects (controller? model? collection?)
 		LibraryModel model = new LibraryModel();
-		LibraryController controller = new LibraryController(model);
+		controller = new LibraryController(model);
 
-		execute(controller);
+		execute();
 
 		// print exit message?
 	}
