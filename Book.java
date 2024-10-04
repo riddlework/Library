@@ -78,13 +78,17 @@ public class Book {
 	}
 
 
-	
+	/**
+	 * Create comparator by title
+	 */
 	public static Comparator<Book> createByTitleComparator() {
-		return new Comparator<Book>() {	
+		return new Comparator<Book>() {
+			@Override
 			public int compare(Book b1, Book b2) {
-				Book b1t = b1.getTitle();
-				Book b2t = b2.getTitle();
-				return b1t.compareTo(b1t);
+				String b1t = b1.getTitle();
+				String b2t = b2.getTitle();
+
+				return b1t.compareTo(b2t);
 			}
 		};	
 	}
