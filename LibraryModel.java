@@ -174,12 +174,37 @@ public class LibraryModel {
 	
 	
 	/*
-	 * read a file and add books from file info
-	 * 
-	 *  *going to need a parameter for input file name*
+	 * read a file and add books to collection
 	 */
 	public void addBooks(String filename) {
+		File inputFile = new File(filename);
 		
+		try {
+			//create scanner
+			Scanner scan = new Scanner(inputFile);
+					
+			//instantiate necessary reading variables
+			String curLine = scan.nextLine();
+			String[] split;
+			String title;
+			String author;
+			
+			//read each line, split into title and author, create a book, add new book to collection
+			while (scan.hasNext()) {
+				curLine = scan.nextLine();
+				split = curLine.split(";");
+				title = split[0];
+				author = split[1];
+				books.add(new Book(title, author));
+			}
+				
+			//close scanner
+			scan.close();
+		}
+		// throw this if the file is not found
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 
