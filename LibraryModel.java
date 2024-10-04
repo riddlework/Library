@@ -20,9 +20,7 @@ public class LibraryModel {
 	 */
 	public LibraryModel() { books = new ArrayList<>(); }
 	
-	
-	
-	
+
 	
 	/*
 	 * find all books with a given search criteria
@@ -116,12 +114,35 @@ public class LibraryModel {
 	 * *going to need parameter to decipher return format*
 	 */
 	public ArrayList<Book> getBooks(String option) {
+		// TODO: deal with escaping references ?? ? ?
 		switch (option) {
-			case "sortByTitle":
-				return
-
+			case "sortTitle":
+				sortTitle();
+				break;
+			case "sortAuthor":
+				sortAuthor();
+				break;
+			case "readBooks":
+				return getReadBooks(true);
+			case "unreadBooks":
+				return getReadBooks(false);
 		}
 
+		return new ArrayList<>(this.books);
+	}
+
+	// return all books that have been read
+	public ArrayList<Book> getReadBooks(boolean wantsReadBooks) {
+		ArrayList<Book> readBooks = new ArrayList<>();
+		ArrayList<Book> unreadBooks = new ArrayList<>();
+
+		for (Book book: this.books) {
+			if (book.isRead()) readBooks.add(book);
+			else unreadBooks.add(book);
+		}
+
+		if (wantsReadBooks) return readBooks;
+		else return unreadBooks;
 	}
 	
 	
