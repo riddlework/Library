@@ -1,11 +1,10 @@
-/*
- * Author(s):
- * File:
- * Course:
- * Description:
+/**
+ * Author(s): Ben Yurek and Fay Garcia
+ * File: Book.java
+ * Course: CSC 335
+ * Description: This class implements a book object.j
  */
-
-
+import java.util.Comparator;
 import java.util.Optional;
 
 public class Book {
@@ -16,7 +15,7 @@ public class Book {
 	private boolean isRead; // false if not read, true if already read
 	private int rating;
 
-	/*
+	/**
 	 * constructor
 	 */
 	public Book(String title, String author, boolean isRead, int rating) {
@@ -26,6 +25,9 @@ public class Book {
 		this.rating = rating;
 	}
 
+	// comparator nested classes in here?
+
+	// getters
 	public String getTitle() { return this.title; }
 
 	public String getAuthor() { return this.author; }
@@ -33,16 +35,15 @@ public class Book {
 	public int getRating() { return this.rating; }
 
 
-	/*
+	/**
 	 * updates the book rating based off user input
 	 */
 	public void updateRating(int rating) { this.rating = rating; }
 	
-	/*
+	/**
 	 * updates the book read status  
 	 */
 	public void updateRead() { this.isRead = true; }
-	
-	
-	
+
+
 }

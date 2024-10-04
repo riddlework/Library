@@ -1,13 +1,11 @@
+/**
+ * Author(s): Ben Yurek and Fay Garcia
+ * File: LibraryModel.java
+ * Course: CSC 335
+ * Description: Implements the Model portion of the MVC design pattern
+ */
 import java.util.Random;
 import java.util.*;
-
-
-/*
- * Author(s):
- * File:
- * Course:
- * Description:
- */
 
 
 public class LibraryModel {
@@ -31,7 +29,8 @@ public class LibraryModel {
 	 * 
 	 * *going to need parameters to find books that have common factors*
 	 */
-	public void chooseSearch(String searchMethod, String searchArg) throws NoSuchBookException,NoSuchAuthorException {
+	public void chooseSearch(String searchMethod, String searchArg) throws NoSuchBookException {
+		// TODO: catch exception in the view
 		
 		switch(searchMethod) {
 			case "title":
@@ -45,14 +44,12 @@ public class LibraryModel {
 	
 
 	private Book searchTitle(String title) throws NoSuchBookException {
-		// TODO: catch exception in the view
 		for (Book book : this.books)
 			if (book.getTitle().equals(title)) return book;
 		throw new NoSuchBookException("No such title exists.");
 	}
 
 	private ArrayList<Book> searchAuthor(String author) throws NoSuchBookException {
-		// TODO: catch exception in the view
 		ArrayList<Book> retList = new ArrayList<>();
 		for (Book book : this.books)
 			if (book.getAuthor().equals(author)) retList.add(book);
@@ -62,7 +59,6 @@ public class LibraryModel {
 	}
 	
 	private ArrayList<Book> searchRating(int rating) throws NoSuchBookException {
-		// TODO: catch exception in the view
 		ArrayList<Book> retList = new ArrayList<>();
 		for (Book book : this.books)
 			if (book.getRating() == rating) retList.add(book);
@@ -116,10 +112,15 @@ public class LibraryModel {
 	 * *probably going to need helper methods for different criteria*
 	 * 
 	 * *going to need to figure out return type*
-	 * 
+	 *
 	 * *going to need parameter to decipher return format*
 	 */
-	public void getBooks() {
+	public ArrayList<Book> getBooks(String option) {
+		switch (option) {
+			case "sortByTitle":
+				return
+
+		}
 
 	}
 	
@@ -134,8 +135,9 @@ public class LibraryModel {
 	 * 
 	 * *going to need to return either data set containing info or Book object itself*
 	 */
-	public void suggestRead() {
-		
+	public Book suggestRead() {
+		Collections.shuffle(this.books);
+		return this.books.get(0);
 	}
 	
 	
@@ -147,7 +149,7 @@ public class LibraryModel {
 	 * 
 	 *  *going to need a parameter for input file name*
 	 */
-	public void addBooks() {
+	public void addBooks(String filename) {
 		
 	}
 	
@@ -155,7 +157,6 @@ public class LibraryModel {
 }
 
 class NoSuchBookException extends Exception {
-
 	// constructor that accepts a message
 	public NoSuchBookException (String message) {
 		super(message);

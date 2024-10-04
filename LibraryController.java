@@ -1,20 +1,16 @@
-/*
- * Author(s):
- * File:
- * Course:
- * Description:
+/**
+ * Authors: Ben Yurek and Fay Garcia
+ * File: LibraryController.java
+ * Course: CSC 335
+ * Description: This file implements the Controller portion of the MVC design pattern
  */
 
 
 public class LibraryController {
-
 	private LibraryModel model;
 
 
-
-	
 	public LibraryController(LibraryModel model) { this.model = model; }
-
 
 	
 	public void search(int rating) {
