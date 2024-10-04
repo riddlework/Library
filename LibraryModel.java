@@ -157,23 +157,17 @@ public class LibraryModel {
 	/*
 	 * Sort the instance variable 'books' by each books rating  
 	 */
-	private void sortRating() {
-		ratingSortedBooks = Collections.sort(books, new createByRatingComparator());
-	}
+	private void sortRating() { Collections.sort(books, Book.createByRatingComparator()); }
 
 	/*
 	 * Sort the instance variable 'books' by each books title  
 	 */
-	private void sortTitle() {
-		titleSortedBooks = Collections.sort(books, new createByTitleComparator());
-	}
+	private void sortTitle() { Collections.sort(books, Book.createByTitleComparator()); }
 
 	/*
 	 * Sort the instance variable 'books' by each books author  
 	 */
-	private void sortAuthor() {
-		AuthorSortedBooks = Collections.sort(books, new createByAuthorComparator());
-	}
+	private void sortAuthor() { Collections.sort(books, Book.createByAuthorComparator()); }
 	
 	
 	
