@@ -25,12 +25,22 @@ public class Book {
 		this.rating = rating;
 	}
 
+	public Book(String title, String author) {
+		this.title = title;
+		this.author = author;
+		this.isRead = false;
+		this.rating = 0;
+	}
+
 	// comparator nested classes in here?
+
 
 	// getters
 	public String getTitle() { return this.title; }
 
 	public String getAuthor() { return this.author; }
+
+	public boolean isRead() {return this.isRead; }
 
 	public int getRating() { return this.rating; }
 
