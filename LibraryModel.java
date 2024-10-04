@@ -34,11 +34,9 @@ public class LibraryModel {
 		
 		switch(searchMethod) {
 			case "title":
-				ArrayList<Book> retList = searchTitle(searchArg);
-				break;
+				return searchTitle(searchArg);
 			case "author":
-				ArrayList<Book> retList = searchAuthor(searchArg);
-				break;
+				return searchAuthor(searchArg);
 		}
 	}
 	
