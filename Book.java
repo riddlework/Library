@@ -46,4 +46,18 @@ public class Book {
 	public void updateRead() { this.isRead = true; }
 
 
+
+	
+	public static Comparator<Book> createByTitleComparator() {
+		return new Comparator<Book>() {	
+			public int compare(Book b1, Book b2) {
+				Book b1t = b1.getTitle();
+				Book b2t = b2.getTitle();
+				return b1t.compareTo(b1t);
+			}
+		};	
+	}
+	
+	
+
 }
