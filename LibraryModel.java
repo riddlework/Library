@@ -7,6 +7,7 @@
 import java.util.Random;
 import java.util.*;
 import java.util.Collections;
+import java.io.*;
 
 
 public class LibraryModel {
@@ -44,14 +45,14 @@ public class LibraryModel {
 
 	private Book searchTitle(String title) throws NoSuchBookException {
 		for (Book book : this.books)
-			if (book.getTitle().equals(title)) return book;
+			if (book.getTitle().equals(title)) return new Book(book);
 		throw new NoSuchBookException("No such title exists.");
 	}
 
 	private ArrayList<Book> searchAuthor(String author) throws NoSuchBookException {
 		ArrayList<Book> retList = new ArrayList<>();
 		for (Book book : this.books)
-			if (book.getAuthor().equals(author)) retList.add(book);
+			if (book.getAuthor().equals(author)) retList.add(new Book(book));
 
 		if (retList.isEmpty()) throw new NoSuchBookException("No such author exists.");
 		else return retList;
@@ -60,7 +61,7 @@ public class LibraryModel {
 	private ArrayList<Book> searchRating(int rating) throws NoSuchBookException {
 		ArrayList<Book> retList = new ArrayList<>();
 		for (Book book : this.books)
-			if (book.getRating() == rating) retList.add(book);
+			if (book.getRating() == rating) retList.add(new Book(book));
 
 		if (retList.isEmpty()) throw new NoSuchBookException("No such rating exists.");
 		else return retList;
@@ -182,6 +183,7 @@ public class LibraryModel {
 		try {
 			//create scanner
 			Scanner scan = new Scanner(inputFile);
+			scan.useDelimiter(";");
 					
 			//instantiate necessary reading variables
 			String curLine = scan.nextLine();
@@ -206,12 +208,6 @@ public class LibraryModel {
 			e.printStackTrace();
 		}
 	}
-
-
-	/*
-	 * Sort the instance variable 'books' by each books rating  
-	 */
-	private void sortRating() { Collections.sort(books, Book.createByRatingComparator()); }
 
 	/*
 	 * Sort the instance variable 'books' by each books title  

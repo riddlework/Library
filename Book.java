@@ -5,7 +5,6 @@
  * Description: This class implements a book object.j
  */
 import java.util.Comparator;
-import java.util.Optional;
 
 public class Book {
 
@@ -39,8 +38,6 @@ public class Book {
 		this.rating = book.rating;
 	}
 
-	// comparator nested classes in here?
-
 
 	// getters
 	public String getTitle() { return this.title; }
@@ -62,22 +59,6 @@ public class Book {
 	 */
 	public void updateRead() { this.isRead = true; }
 
-	/**
-	 * Create comparator by rating
-	 */
-	public static Comparator<Book> createByRatingComparator() {
-		return new Comparator<Book>() {
-			@Override
-			public int compare(Book b1, Book b2) {
-				int b1r = b1.getRating();
-				int b2r = b2.getRating();
-
-				if (b1r < b2r) return -1;
-				else if (b1r == b2r) return 0;
-				else return 1;
-			}
-		};
-	}
 
 	/**
 	 * Create comparator by author
@@ -94,8 +75,9 @@ public class Book {
 		};
 	}
 
-
-	
+	/**
+	 * create comparator by title
+	 */
 	public static Comparator<Book> createByTitleComparator() {
 		return new Comparator<Book>() {
 			@Override
