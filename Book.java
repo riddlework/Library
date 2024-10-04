@@ -45,5 +45,36 @@ public class Book {
 	 */
 	public void updateRead() { this.isRead = true; }
 
+	/**
+	 * Create comparator by rating
+	 */
+	public static Comparator<Book> createByRatingComparator() {
+		return new Comparator<Book>() {
+			@Override
+			public int compare(Book b1, Book b2) {
+				int b1r = b1.getRating();
+				int b2r = b2.getRating();
+
+				if (b1r < b2r) return -1;
+				else if (b1r == b2r) return 0;
+				else return 1;
+			}
+		};
+	}
+
+	/**
+	 * Create comparator by author
+	 */
+	public static Comparator<Book> createByAuthorComparator() {
+		return new Comparator<Book>() {
+			@Override
+			public int compare(Book b1, Book b2) {
+				String b1a = b1.getAuthor();
+				String b2a = b2.getAuthor();
+
+				return b1a.compareTo(b2a);
+			}
+		};
+	}
 
 }
