@@ -152,6 +152,29 @@ public class LibraryModel {
 	public void addBooks(String filename) {
 		
 	}
+
+
+	/*
+	 * Sort the instance variable 'books' by each books rating  
+	 */
+	private void sortRating() {
+		ratingSortedBooks = Collections.sort(books, new createByRatingComparator());
+	}
+
+	/*
+	 * Sort the instance variable 'books' by each books title  
+	 */
+	private void sortTitle() {
+		titleSortedBooks = Collections.sort(books, new createByTitleComparator());
+	}
+
+	/*
+	 * Sort the instance variable 'books' by each books author  
+	 */
+	private void sortAuthor() {
+		AuthorSortedBooks = Collections.sort(books, new createByAuthorComparator());
+	}
+	
 	
 	
 }
