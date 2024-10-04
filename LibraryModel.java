@@ -29,15 +29,15 @@ public class LibraryModel {
 	 * 
 	 * *going to need parameters to find books that have common factors*
 	 */
-	public void chooseSearch(String searchMethod, String searchArg) throws NoSuchBookException {
+	public ArrayList<retList> chooseSearch(String searchMethod, String searchArg) throws NoSuchBookException {
 		// TODO: catch exception in the view
 		
 		switch(searchMethod) {
 			case "title":
-				searchTitle(searchArg);
+				ArrayList<Book> retList = searchTitle(searchArg);
 				break;
 			case "author":
-				searchAuthor(searchArg);
+				ArrayList<Book> retList = searchAuthor(searchArg);
 				break;
 		}
 	}
