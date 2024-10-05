@@ -13,7 +13,7 @@ This design choice allowed us to maintain separation between our view class, whi
 a means to manipulate our data to meet the requirements of the project spec. By doing so, we were able to house our important data in the
 model class and safely pass necessary data to the UI, via the controller, without violating the rules of safe encapsulation. The separation
 that we achieved with this format was beneficial because it facilitated a class for user input and program response, a class for data storage
-and manipulation, and a class for safe passage between the two. 
+and manipulation, and a class for safe passage between the two.
 
 Additionally, we implemented a fourth class (Book) that symbolized a book in the users collection/library. This design implementation 
 permitted the existence of unique objects that could contain important attributes. Since the implementation of of the user commands was
@@ -29,15 +29,24 @@ No interfaces were implemented.
 
 ---------- Design choices regarding library classes involved : 
 
-...
+Most classes we used were from the java.util library. We used the Scanner and File classes to read in user input and files. We utilized the Collections class
+solely to apply its shuffle method to ArrayLists. We used ArrayLists as the data structure that represented the books in our library. We used the Comparator class
+to create Comparator factory methods for our book class. We intentionally structured our project such that we could use the available Java libraries in the
+most straightforward way possible.
 
 
 ---------- Design choices regarding data structures used :
 
-...
+We used an ArrayList of books to represent our library. This was the simplest method that allowed us to repeatedly sort or iterate through the list easily.
+It was simple to make copies of the ArrayList as necessary to maintain encapsulation. Additionally, we were able to use the Collections.shuffle() method to
+choose and suggest a random unread book.
 
 
 ---------- Design choices regarding design patterns used :
 
-...
+As stated above, we implemented the Model-View-Controller design pattern, which allowed us to separate the user interface from the implementation of the
+data manipulation.
+
+We used factory methods to create comparators for our Book class. We wrote one to sort a list of books based on their titles and one to sort a list of books
+based on their author.
 
