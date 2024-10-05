@@ -26,7 +26,7 @@ public class LibraryController {
 	// do input validation here
 	public void rate(String title, int rating) throws NoSuchBookException { model.rate(title, rating); }
 
-	public void getBooks(String option) throws NoSuchBookException { model.getBooks(option); }
+	public ArrayList<Book> getBooks(String option) throws NoSuchBookException { return model.getBooks(option); }
 
 	public void suggestRead() throws NoSuchBookException { model.suggestRead(); }
 

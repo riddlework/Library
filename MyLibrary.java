@@ -85,7 +85,7 @@ public class MyLibrary {
 					} break;
 				case "getBooks":
 					if (input.length == 2) {
-						controller.getBooks(input[1]);
+						dumpBooks(controller.getBooks(input[1]));
 					} break;
 				case "rate":
 					if (input.length == 3) {
@@ -96,11 +96,11 @@ public class MyLibrary {
 						if (input[1].equals("rating")
 								&& (0 < Integer.parseInt(input[2]))
 								&& (6 > Integer.parseInt(input[2]))) {
-							controller.searchRating(Integer.parseInt(input[2]));
+							dumpBooks(controller.searchRating(Integer.parseInt(input[2])));
 						} else if (input[1].equals("title")) {
-							controller.searchTitle(input[2]);
+							dumpBook(controller.searchTitle(input[2]));
 						} else if (input[1].equals("author")) {
-							controller.searchTitle(input[2]);
+							dumpBooks(controller.searchAuthor(input[2]));
 						}
 					} break;
 				case "setToRead":
@@ -134,7 +134,7 @@ public class MyLibrary {
 				+ "| extra input arguments that can be found in the \n"
 				+ "| bottom half of the table. \n|\n"
 				+ "| -Each command is case sensitive and must be typed exactly as it appears.\n"
-				+ "| -Commands and arguments should be seperated by commas ',' \n
+				+ "| -Commands and arguments should be separated by commas ',' \n"
 				+ "|  	For example: search, title, Lord of the Rings\n|");
 		System.out.println("| * addBook   :		Add a new book to your collection.");
 		System.out.println("| * addBooks  :		Submit a text file of books to add to your collection.");
@@ -158,8 +158,19 @@ public class MyLibrary {
 
 	}
 
-	void dumpBooks(ArrayList<Book> books) {
+	private static void dumpBooks(ArrayList<Book> books) {
+		for (Book book: books) dumpBook(book);
+	}
 
+	private static void dumpBook(Book book) {
+		System.out.println("Title       : " + book.getTitle());
+		System.out.println("Author      : " + book.getAuthor());
+
+		String isReadString = book.isRead() ? "Read" : "Unread";
+		System.out.println("Read/Unread : " + isReadString);
+
+		int rating = book.getRating();
+		if (rating > 0) System.out.println("Rating        : " + String.valueOf(rating));
 	}
 
 
