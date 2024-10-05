@@ -1,0 +1,43 @@
+Authors		: Ben Yurek, Fay Garcia 
+File		: doc.txt
+Course		: CSC 335 FA 2024 w/ Melanie Lotz
+Project		: LA 2 (MyLibrary)
+Description	: Design documentation to accompany MyLibrary.java, LibraryController.java, 
+			  LibraryModel.java, and Book.java
+			  
+			  
+---------- Design choices regarding classes : 
+
+To implement the library collection we decided to follow the same View-Controller-Model format that was used in the "Cryptograms" project. 
+This design choice allowed us to maintain separation between our view class, which served as a UI, and our Model class, which served as
+a means to manipulate our data to meet the requirements of the project spec. By doing so, we were able to house our important data in the
+model class and safely pass necessary data to the UI, via the controller, without violating the rules of safe encapsulation. The separation
+that we achieved with this format was beneficial because it facilitated a class for user input and program response, a class for data storage
+and manipulation, and a class for safe passage between the two. 
+
+Additionally, we implemented a fourth class (Book) that symbolized a book in the users collection/library. This design implementation 
+permitted the existence of unique objects that could contain important attributes. Since the implementation of of the user commands was
+reliant on the manipulation of book properties, having a class that could be instantiated for each book was essential to the construction of the 
+class structure. Also, having this unique Book class allowed simplification of the LibraryModel class. We were able to use simple pre-existing data 
+structures to hold the book objects rather than creating a more complex class for the library.    
+
+
+---------- Design choices regarding interfaces involved : 
+
+No interfaces were implemented.
+
+
+---------- Design choices regarding library classes involved : 
+
+...
+
+
+---------- Design choices regarding data structures used :
+
+...
+
+
+---------- Design choices regarding design patterns used :
+
+...
+
