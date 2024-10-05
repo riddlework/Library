@@ -131,9 +131,7 @@ public class LibraryModel {
 		if (wantsReadBooks) return readBooks;
 		else return unreadBooks;
 	}
-	
-	
-	
+
 	
 	
 	/*
@@ -144,12 +142,12 @@ public class LibraryModel {
 	 * *going to need to return either data set containing info or Book object itself*
 	 */
 	public Book suggestRead() throws NoSuchBookException {
-		Collections.shuffle(this.books);
+		ArrayList<Book> booksToReturn = getReadBooks(false);
+		if (booksToReturn.isEmpty()) throw new NoSuchBookException("There are no unread books!");
+		Collections.shuffle(booksToReturn);
 		return this.books.get(0);
 	}
-	
-	
-	
+
 	
 	
 	/*
