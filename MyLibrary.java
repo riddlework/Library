@@ -4,6 +4,7 @@
  * Course: CSC 335
  * Description: Implements the View portion of the MVC Design pattern
  */
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -42,7 +43,7 @@ public class MyLibrary {
 
 		String command = inputScanner.nextLine();
 
-		String[] splitCommand = command.split(" ");
+		String[] splitCommand = command.split(", ");
 		return validateCommand(splitCommand);
 	}
 
@@ -77,23 +78,19 @@ public class MyLibrary {
 				case "addBook":
 					if (input.length == 3) {
 						controller.addBook(input[1], input[2]);
-					}
-					break;
+					} break;
 				case "addBooks":
 					if (input.length == 2) {
 						controller.addBooks(input[1]);
-					}
-					break;
+					} break;
 				case "getBooks":
 					if (input.length == 2) {
 						controller.getBooks(input[1]);
-					}
-					break;
+					} break;
 				case "rate":
 					if (input.length == 3) {
 						controller.rate(input[1], Integer.parseInt(input[2]));
-					}
-					break;
+					} break;
 				case "search":
 					if (input.length == 3) {
 						if (input[1].equals("rating")
@@ -105,29 +102,25 @@ public class MyLibrary {
 						} else if (input[1].equals("author")) {
 							controller.searchTitle(input[2]);
 						}
-					}
-					break;
+					} break;
 				case "setToRead":
 					if (input.length == 2) {
 						controller.setToRead(input[1]);
-					}
-					break;
+					} break;
 				case "suggestRead":
 					if (input.length == 1) {
 						controller.suggestRead();
-					}
-					break;
+					} break;
 				case "help":
 					help();
-					break;
-				default:
-					System.out.println("Invalid argument input for given command. Type 'help' for a list of valid command arguments.");
 					break;
 			}
 		}
 		catch (NoSuchBookException e) {
 			e.printStackTrace();
 		}
+
+		System.out.println("Invalid argument input for given command. Type 'help' for a list of valid command arguments.");
 	}
 
 
@@ -163,8 +156,15 @@ public class MyLibrary {
 
 	}
 
+	void dumpBooks(ArrayList<Book> books) {
+
+	}
 
 
+// sepate arguments by comma
+	// dumpBooks method
+	// more detailed command thingy
+	// fix thingy thats printed out by exception catching
 
 	/*
 	 * The purpose of this method is to print a message to the user when they provide a keyboard input.
