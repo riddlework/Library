@@ -12,36 +12,33 @@ public class LibraryController {
 
 	public LibraryController(LibraryModel model) { this.model = model; }
 
-	
+	public Book searchTitle(String title) throws NoSuchBookException {
+		return model.searchTitle(title);
+	}
+
+	public ArrayList<Book> searchAuthor(String author) throws NoSuchBookException {
+		return model.searchAuthor(author);
+	}
+
 	public ArrayList<Book> searchRating(int rating) throws NoSuchBookException {
 		return model.searchRating(rating);
 	}
 
-	
-	public void search(String searchMethod, String searchArg) {
-		model.search(searchMethod, searchArg);
-	}
-	public void search(String searchMethod, String searchAarg) {
-
-	}
-	
-	
-
-	public void addBook() {
-		model.addBook();
+	public void addBook(String author, String title) {
+		model.addBook(author, title);
 	}
 
-	public void setToRead() {
-		model.setToRead();	
+	public void setToRead(String title) throws NoSuchBookException {
+		model.setToRead(title);
 	}
 
 	// do input validation here
-	public void rate() {
-		model.rate();
+	public void rate(String title, int rating) throws NoSuchBookException {
+		model.rate(title, rating);
 	}
 
-	public void getBooks() {
-		model.getBooks();
+	public void getBooks(String option) throws NoSuchBookException {
+		model.getBooks(option);
 	}
 
 	public void suggestRead() {

@@ -52,8 +52,8 @@ public class LibraryModel {
 	 * 
 	 * *going to need parameters to create book*
 	 */
-	public void addBook(String title, String author, boolean isRead, int rating) {
-		Book book = new Book(title, author, isRead, rating);
+	public void addBook(String title, String author) {
+		Book book = new Book(title, author);
 		this.books.add(book);
 	}
 
@@ -92,8 +92,7 @@ public class LibraryModel {
 	 *
 	 * *going to need parameter to decipher return format*
 	 */
-	public ArrayList<Book> getBooks(String option) {
-		// TODO: deal with escaping references ?? ? ?
+	public ArrayList<Book> getBooks(String option) throws NoSuchBookException {
 		ArrayList<Book> booksToReturn = this.books;
 		switch (option) {
 			case "sortTitle":
@@ -109,6 +108,8 @@ public class LibraryModel {
 				booksToReturn = getReadBooks(false);
 				break;
 		}
+
+		if (booksToReturn.isEmpty()) throw new NoSuchBookException("No such books exist!");
 
 		// make a copy to avoid escaping references and return
 		ArrayList<Book> booksToReturnCopy = new ArrayList<>();
@@ -142,7 +143,7 @@ public class LibraryModel {
 	 * 
 	 * *going to need to return either data set containing info or Book object itself*
 	 */
-	public Book suggestRead() {
+	public Book suggestRead() throws NoSuchBookException {
 		Collections.shuffle(this.books);
 		return this.books.get(0);
 	}
