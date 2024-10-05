@@ -74,53 +74,39 @@ public class MyLibrary {
 	private static void validateArgs(String[] input) {
 		// handle exception
 		try {
-			switch (input[0]) {
-				case "addBook":
-					if (input.length == 3) {
-						controller.addBook(input[1], input[2]);
-					} break;
-				case "addBooks":
-					if (input.length == 2) {
-						controller.addBooks(input[1]);
-					} break;
-				case "getBooks":
-					if (input.length == 2) {
-						dumpBooks(controller.getBooks(input[1]));
-					} break;
-				case "rate":
-					if (input.length == 3) {
-						controller.rate(input[1], Integer.parseInt(input[2]));
-					} break;
-				case "search":
-					if (input.length == 3) {
-						if (input[1].equals("rating")
-								&& (0 < Integer.parseInt(input[2]))
-								&& (6 > Integer.parseInt(input[2]))) {
-							dumpBooks(controller.searchRating(Integer.parseInt(input[2])));
-						} else if (input[1].equals("title")) {
-							dumpBook(controller.searchTitle(input[2]));
-						} else if (input[1].equals("author")) {
-							dumpBooks(controller.searchAuthor(input[2]));
-						}
-					} break;
-				case "setToRead":
-					if (input.length == 2) {
-						controller.setToRead(input[1]);
-					} break;
-				case "suggestRead":
-					if (input.length == 1) {
-						controller.suggestRead();
-					} break;
-				case "help":
-					help();
-					break;
+			int len = input.length;
+			if (input[0].equals("addBook") && len == 3)  {
+				controller.addBook(input[1], input[2]);
+			} else if (input[0].equals("addBooks") && len == 2) {
+				controller.addBooks(input[1]);
+			} else if (input[0].equals("getBooks") && len == 2) {
+				dumpBooks(controller.getBooks(input[1]));
+			} else if (input[0].equals("rate") && len == 3) {
+				controller.rate(input[1], Integer.parseInt(input[2]));
+			} else if (input[0].equals("search") && len == 3) {
+				if (input[1].equals("rating")
+						&& (0 < Integer.parseInt(input[2]))
+						&& (6 > Integer.parseInt(input[2]))) {
+					dumpBooks(controller.searchRating(Integer.parseInt(input[2])));
+				} else if (input[1].equals("title")) {
+					dumpBook(controller.searchTitle(input[2]));
+				} else if (input[1].equals("author")) {
+					dumpBooks(controller.searchAuthor(input[2]));
+				}
+			} else if (input[0].equals("setToRead") && len == 2) {
+				controller.setToRead(input[1]);
+			} else if (input[0].equals("suggestRead") && len == 1) {
+				dumpBook(controller.suggestRead());
+			} else if (input[0].equals("help")) {
+				help();
+			} else {
+				System.out.println("Invalid argument input for given command. Type 'help' for a list of valid command arguments.");
 			}
 		}
 		catch (NoSuchBookException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
-		System.out.println("Invalid argument input for given command. Type 'help' for a list of valid command arguments.");
 	}
 
 
@@ -163,14 +149,15 @@ public class MyLibrary {
 	}
 
 	private static void dumpBook(Book book) {
-		System.out.println("Title       : " + book.getTitle());
-		System.out.println("Author      : " + book.getAuthor());
+		System.out.println("| Title       : " + book.getTitle());
+		System.out.println("| Author      : " + book.getAuthor());
 
 		String isReadString = book.isRead() ? "Read" : "Unread";
-		System.out.println("Read/Unread : " + isReadString);
+		System.out.println("| Read/Unread : " + isReadString);
 
 		int rating = book.getRating();
-		if (rating > 0) System.out.println("Rating        : " + String.valueOf(rating));
+		if (rating > 0) System.out.println("| Rating       : " + String.valueOf(rating));
+		System.out.println("+" + "-".repeat(59));
 	}
 
 
@@ -178,20 +165,6 @@ public class MyLibrary {
 	// dumpBooks method
 	// more detailed command thingy
 	// fix thingy thats printed out by exception catching
-
-	/*
-	 * The purpose of this method is to print a message to the user when they provide a keyboard input.
-	 * this way they know the status of their command before the next input prompt.
-	 *
-	 * parameters
-	 * command: users last input command string
-	 *
-	 * returns: void
-	 */
-	private static void printCommand(String command) {
-
-	}
-
 	/*
 	 * main method
 	 */

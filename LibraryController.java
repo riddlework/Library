@@ -11,6 +11,7 @@ public class LibraryController {
 	private LibraryModel model;
 
 
+
 	public LibraryController(LibraryModel model) { this.model = model; }
 
 	public Book searchTitle(String title) throws NoSuchBookException { return model.searchTitle(title); }
@@ -19,7 +20,7 @@ public class LibraryController {
 
 	public ArrayList<Book> searchRating(int rating) throws NoSuchBookException { return model.searchRating(rating); }
 
-	public void addBook(String title, String author) { model.addBook(author, title); }
+	public void addBook(String title, String author) { model.addBook(title, author); }
 
 	public void setToRead(String title) throws NoSuchBookException { model.setToRead(title); }
 
@@ -28,7 +29,7 @@ public class LibraryController {
 
 	public ArrayList<Book> getBooks(String option) throws NoSuchBookException { return model.getBooks(option); }
 
-	public void suggestRead() throws NoSuchBookException { model.suggestRead(); }
+	public Book suggestRead() throws NoSuchBookException { return model.suggestRead(); }
 
 	public void addBooks(String filename) { model.addBooks(filename); }
 

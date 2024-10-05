@@ -11,7 +11,7 @@ import java.io.*;
 
 public class LibraryModel {
 	// instance variables
-	ArrayList<Book> books;
+	private ArrayList<Book> books;
 
 
 	/*
@@ -22,7 +22,7 @@ public class LibraryModel {
 
 	public Book searchTitle(String title) throws NoSuchBookException {
 		for (Book book : this.books)
-			if (book.getTitle().equals(title)) return new Book(book);
+			if (book.getTitle().equals(title)) return book;
 		throw new NoSuchBookException("No such title exists.");
 	}
 
@@ -93,18 +93,20 @@ public class LibraryModel {
 	 * *going to need parameter to decipher return format*
 	 */
 	public ArrayList<Book> getBooks(String option) throws NoSuchBookException {
-		ArrayList<Book> booksToReturn = this.books;
+		ArrayList<Book> booksToReturn = new ArrayList<>();
 		switch (option) {
-			case "sortTitle":
+			case "title":
 				sortTitle();
+				booksToReturn = new ArrayList<>(this.books);
 				break;
-			case "sortAuthor":
+			case "author":
 				sortAuthor();
+				booksToReturn = new ArrayList<>(this.books);
 				break;
-			case "readBooks":
+			case "read":
 				booksToReturn = getReadBooks(true);
 				break;
-			case "unreadBooks":
+			case "unread":
 				booksToReturn = getReadBooks(false);
 				break;
 		}
@@ -113,9 +115,10 @@ public class LibraryModel {
 
 		// make a copy to avoid escaping references and return
 		ArrayList<Book> booksToReturnCopy = new ArrayList<>();
-		for (Book book: booksToReturnCopy) {
+		for (Book book: booksToReturn) {
 			booksToReturnCopy.add(new Book(book));
-		} return booksToReturnCopy;
+		}
+		return booksToReturnCopy;
 	}
 
 	// return all books that have been read
@@ -145,7 +148,7 @@ public class LibraryModel {
 		ArrayList<Book> booksToReturn = getReadBooks(false);
 		if (booksToReturn.isEmpty()) throw new NoSuchBookException("There are no unread books!");
 		Collections.shuffle(booksToReturn);
-		return this.books.get(0);
+		return booksToReturn.get(0);
 	}
 
 	
@@ -180,7 +183,7 @@ public class LibraryModel {
 		}
 		// throw this if the file is not found
 		catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("File not found. Try again!");
 		}
 	}
 
