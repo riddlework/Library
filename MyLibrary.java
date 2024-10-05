@@ -133,7 +133,9 @@ public class MyLibrary {
 				+ "| name is preceded by a star (*), then it requires \n"
 				+ "| extra input arguments that can be found in the \n"
 				+ "| bottom half of the table. \n|\n"
-				+ "| (Each command is case sensitive and must be typed exactly as it appears.)\n|");
+				+ "| -Each command is case sensitive and must be typed exactly as it appears.\n"
+				+ "| -Commands and arguments should be seperated by commas ',' \n
+				+ "|  	For example: search, title, Lord of the Rings\n|");
 		System.out.println("| * addBook   :		Add a new book to your collection.");
 		System.out.println("| * addBooks  :		Submit a text file of books to add to your collection.");
 		System.out.println("| * getBooks  : 	Display all books in your collection that fall under a specified category.");
