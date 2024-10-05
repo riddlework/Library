@@ -1,21 +1,15 @@
 /**
- * View -- User interface
+ * Author(s): Ben Yurek and Fay Garcia
+ * File: MyLibrary.java
+ * Course: CSC 335
+ * Description: Implements the View portion of the MVC Design pattern
  */
-
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 
-/*
- * Author(s):
- * File:
- * Course:
- * Description:
+/**
+ * View -- User interface
  */
-
-
-
 public class MyLibrary {
 
 	private static LibraryController controller;

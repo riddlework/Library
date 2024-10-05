@@ -8,7 +8,6 @@ import java.util.*;
 
 public class LibraryController {
 
-
 	private LibraryModel model;
 
 
@@ -20,7 +19,7 @@ public class LibraryController {
 
 	public ArrayList<Book> searchRating(int rating) throws NoSuchBookException { return model.searchRating(rating); }
 
-	public void addBook(String author, String title) { model.addBook(author, title); }
+	public void addBook(String title, String author) { model.addBook(author, title); }
 
 	public void setToRead(String title) throws NoSuchBookException { model.setToRead(title); }
 
