@@ -9,48 +9,50 @@ import java.util.Scanner;
 
 
 /**
- * View -- User interface
+ * MyLibrary implements the user interface -- prompting the user for commands, validating input,
+ * catching exceptions, and passing the appropriate commands onto the Controller.
  */
 public class MyLibrary {
 
+	// instance variable -- the controller
 	private static LibraryController controller;
 
 
+	/**
+	 * execute contains the main execution loop, calling the appropriate functions for execution to occur
+	 */
 	private static void execute() {
 		boolean status = true;
 		while (status) status = handleCommand();
 	}
 
-	
 
-	/*
-	 * This method is called with each repetition of the main() loop to pass the users next command
-	 * to the controller.
-	 *
-	 * parameters
-	 * command: users input command string
-	 *
-	 * returns: void
+	/**
+	 * handleCommand reads a command from the user and passes the input to validateCommand
+	 * @return a boolean -- true if execution should continue and false if the program should terminate.
 	 */
 	private static boolean handleCommand() {
 
-		// decipher command here and have different controller methods for each?
-		// or, pass the string to the controller and decipher there?  (i think this one so we can delete this method)
-
+		// read input from the user
 		Scanner inputScanner = new Scanner(System.in);
-
-		System.out.print("Input a command, or type help for a list of valid commands: ");
-
+		System.out.print("| Input a command, or type help for a list of valid commands: ");
 		String command = inputScanner.nextLine();
 
+		// split the input into the command and its arguments
 		String[] splitCommand = command.split(", ");
 		return validateCommand(splitCommand);
 	}
 
 
-
+	/**
+	 * validateCommand parses the beginning of the input and checks if it is a valid command. If the command
+	 * 		  it passes the rest of the input to validateArg
+	 * @param input the input string given by the user
+	 * @return a boolean -- true if program execution should continue and false if the program should terminate
+	 */
 	private static boolean validateCommand(String[] input) {
 
+		// check for a valid command
 		switch (input[0]) {
 			case "addBook":
 			case "addBooks":
@@ -60,21 +62,32 @@ public class MyLibrary {
 			case "setToRead":
 			case "suggestRead":
 			case "help":
+				// validate the arguments
 				validateArgs(input);
 				return true;
 			case "exit":
 				return false;
 			default:
-				System.out.println("Invalid command input. Type 'help' for a list of valid commands.");
+				// if the command is invalid, prompt the user for input
+				System.out.println("| Invalid command input. Type 'help' for a list of valid commands.");
 				return true;
 		}
 	}
 
 
+	/**
+	 * validateArgs validates the arguments and passes the appropriate commands to the controller
+	 * @param input A String, the arguments to be validated
+	 */
 	private static void validateArgs(String[] input) {
-		// handle exception
 		try {
 			int len = input.length;
+
+			/*
+			check the input string
+			validate the number of arguments
+			pass the appropriate commands to the controller
+			 */
 			if (input[0].equals("addBook") && len == 3)  {
 				controller.addBook(input[1], input[2]);
 			} else if (input[0].equals("addBooks") && len == 2) {
@@ -100,16 +113,21 @@ public class MyLibrary {
 			} else if (input[0].equals("help")) {
 				help();
 			} else {
-				System.out.println("Invalid argument input for given command. Type 'help' for a list of valid command arguments.");
+				// if invalid input is passed, prompt the user accordingly
+				System.out.println("| Invalid argument input for given command. Type 'help' for a list of valid command arguments.");
 			}
 		}
 		catch (NoSuchBookException e) {
+			// if no such book exists, pass the message along to the user
 			System.out.println(e.getMessage());
 		}
 
 	}
 
 
+	/**
+	 * print out a help page of commands and formats for the user
+	 */
 	public static void help() {
 
 		System.out.println('+' + "-".repeat(100));
@@ -144,10 +162,19 @@ public class MyLibrary {
 
 	}
 
+
+	/**
+	 * dumpBooks prints out a list of book titles, authors, read statuses, and ratings in a readable format.
+	 * @param books the arraylist of books to be dumped.
+	 */
 	private static void dumpBooks(ArrayList<Book> books) {
 		for (Book book: books) dumpBook(book);
 	}
 
+	/**
+	 * print out the title, author, read status, and rating of one book in a readable format
+	 * @param book the book object whose information will be printed
+	 */
 	private static void dumpBook(Book book) {
 		System.out.println("| Title       : " + book.getTitle());
 		System.out.println("| Author      : " + book.getAuthor());
@@ -155,28 +182,24 @@ public class MyLibrary {
 		String isReadString = book.isRead() ? "Read" : "Unread";
 		System.out.println("| Read/Unread : " + isReadString);
 
+		// print the rating if it exists
 		int rating = book.getRating();
 		if (rating > 0) System.out.println("| Rating       : " + String.valueOf(rating));
 		System.out.println("+" + "-".repeat(59));
 	}
 
 
-// sepate arguments by comma
-	// dumpBooks method
-	// more detailed command thingy
-	// fix thingy thats printed out by exception catching
-	/*
-	 * main method
+	/**
+	 * the main method -- creates the model and controller and calls the execution loop
+	 * @param args N/A
 	 */
 	public static void main(String[] args) {
 
-		// instantiate objects (controller? model? collection?)
+		// instantiate objects
 		LibraryModel model = new LibraryModel();
 		controller = new LibraryController(model);
 
 		execute();
-
-		// print exit message?
 	}
 
 }
