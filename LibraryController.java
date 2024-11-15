@@ -4,6 +4,7 @@
  * Course: CSC 335
  * Description: This file implements the Controller portion of the MVC design pattern
  */
+import java.io.FileNotFoundException;
 import java.util.*;
 
 /**
@@ -95,6 +96,6 @@ public class LibraryController {
 	 * add a file of books to the library
 	 * @param filename a string -- the name of the file containing the books to be added
 	 */
-	public void addBooks(String filename) { model.addBooks(filename); }
+	public void addBooks(String filename) throws FileNotFoundException { model.addBooks(filename); }
 
 }

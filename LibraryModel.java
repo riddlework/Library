@@ -199,35 +199,31 @@ public class LibraryModel {
 	 * add a list of books to the library from a given file
 	 * @param filename a string -- the name of the file containing the list of books
 	 */
-	public void addBooks(String filename) {
+	public void addBooks(String filename) throws FileNotFoundException {
 		File inputFile = new File(filename);
-		
-		try {
-			//create scanner
-			Scanner scan = new Scanner(inputFile);
 
-			//instantiate necessary reading variables
-			String curLine = scan.nextLine();
-			String[] split;
-			String title;
-			String author;
-			
-			//read each line, split into title and author, create a book, add new book to collection
-			while (scan.hasNext()) {
-				curLine = scan.nextLine();
-				split = curLine.split(";");
-				title = split[0];
-				author = split[1];
-				books.add(new Book(title, author));
-			}
-				
-			//close scanner
-			scan.close();
+		//create scanner
+		Scanner scan = new Scanner(inputFile);
+
+		//instantiate necessary reading variables
+		String curLine = scan.nextLine();
+		String[] split;
+		String title;
+		String author;
+
+		//read each line, split into title and author, create a book, add new book to collection
+		while (scan.hasNext()) {
+			curLine = scan.nextLine();
+			split = curLine.split(";");
+			title = split[0];
+			author = split[1];
+			books.add(new Book(title, author));
 		}
-		// throw this if the file is not found
-		catch (FileNotFoundException e) {
-			System.out.println("| File not found. Try again!");
-		}
+
+		//close scanner
+		scan.close();
+		
+
 	}
 }
 

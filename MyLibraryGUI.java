@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class MyLibraryGUI {
@@ -12,7 +13,12 @@ public class MyLibraryGUI {
     private enum Operation {
         SEARCH_TITLE,
         SEARCH_AUTHOR,
-        SEARCH_RATING;
+        SEARCH_RATING,
+        ADD_BOOK,
+        ADD_BOOKS,
+        SET_TO_READ,
+        RATE,
+        GET_BOOKS_BY_READ_STATUS,
     }
 
     private static Operation op;
@@ -23,45 +29,152 @@ public class MyLibraryGUI {
         JMenuBar menuBar = new JMenuBar();
 
         // create search commands
-        JMenu searchMenu = new JMenu("Search");
+        JMenu searchMenu, addMenu, setMenu, rateMenu, printMenu, suggestMenu, helpMenu;
+        searchMenu = new JMenu("Search");
+        addMenu = new JMenu("Add");
+        setMenu = new JMenu("Set");
+        rateMenu = new JMenu("Rate");
+        printMenu = new JMenu("Print");
+        suggestMenu = new JMenu("Suggest");
+        helpMenu = new JMenu("Help");
 
-        JMenuItem byTitle, byAuthor, byRating;
-        byTitle = new JMenuItem("By Title");
-        byAuthor = new JMenuItem("By Author");
-        byRating = new JMenuItem("By Rating");
+        JMenuItem searchByTitle, searchByAuthor, searchByRating, addBook, addBooks, setToRead, rate, getBooksByTitle, getBooksByAuthor, getBooksByReadStatus, suggestRead, help;
+        searchByTitle = new JMenuItem("By Title");
+        searchByAuthor = new JMenuItem("By Author");
+        searchByRating = new JMenuItem("By Rating");
+        addBook = new JMenuItem("Add Book");
+        addBooks = new JMenuItem("Add Books");
+        setToRead = new JMenuItem("Set Book to Read");
+        rate = new JMenuItem("Rate a Book");
+        getBooksByTitle = new JMenuItem("Sort Books by Title");
+        getBooksByAuthor = new JMenuItem("Sort Books by Author");
+        getBooksByReadStatus = new JMenuItem("Print Books by Read Status");
+        suggestRead = new JMenuItem("I'm feeling lucky ;-)");
+        help = new JMenuItem("Help");
+
 
         // add action listeners to menu items
-        byTitle.addActionListener(new ActionListener() {
+        searchByTitle.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                textArea.setText("");
                 inputField.setText("Input a title to search for here...");
                 op = Operation.SEARCH_TITLE;
            }
         });
-        byAuthor.addActionListener(new ActionListener() {
+        searchByAuthor.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 textArea.setText("");
                 inputField.setText("Input an author to search for here...");
                 op = Operation.SEARCH_AUTHOR;
             }
         });
-        byRating.addActionListener(new ActionListener() {
+        searchByRating.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 textArea.setText("");
                 inputField.setText("Input a rating to search for here...");
                 op = Operation.SEARCH_RATING;
             }
         });
+        addBook.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                textArea.setText("");
+                inputField.setText("Input title, author here...");
+                op = Operation.ADD_BOOK;
+            }
+        });
+        addBooks.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                textArea.setText("");
+                inputField.setText("Input the name of the file here...");
+                op = Operation.ADD_BOOKS;
+            }
+        });
+        setToRead.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                textArea.setText("");
+                inputField.setText("Input the name of the book here...");
+                op = Operation.SET_TO_READ;
+            }
+        });
+        rate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                textArea.setText("");
+                inputField.setText("Input 'name, rating' here...");
+                op = Operation.RATE;
+            }
+        });
+        getBooksByTitle.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    textArea.setText(dumpBooks(controller.getBooks("title")));
+                } catch (NoSuchBookException f) {
+                    textArea.setText("No such books exist!");
+                }
+            }
+        });
+        getBooksByAuthor.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    textArea.setText(dumpBooks(controller.getBooks("author")));
+                } catch (NoSuchBookException f) {
+                    textArea.setText("No such books exist!");
+                }
+            }
+        });
+        getBooksByReadStatus.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                textArea.setText("");
+                inputField.setText("Input desired read status (read/unread)...");
+                op = Operation.GET_BOOKS_BY_READ_STATUS;
+            }
+        });
+        suggestRead.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                inputField.setText("...");
+                try {
+                    textArea.setText(dumpBook(controller.suggestRead()));
+                } catch (NoSuchBookException f) {
+                    textArea.setText("No unread books");
+                }
+            }
+        });
+        help.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                inputField.setText("...");
+                String output = '+' + "-".repeat(100);
+                output += "If a command requires multiple arguments, please provide them in the following form:\n" +
+                        "argument1, argument2.\n";
+                output += "Please note that book names and authors are case-sensitive.\n";
+            }
+        });
 
-        searchMenu.add(byTitle);
-        searchMenu.add(byAuthor);
-        searchMenu.add(byRating);
+
+        searchMenu.add(searchByTitle);
+        searchMenu.add(searchByAuthor);
+        searchMenu.add(searchByRating);
+
+        addMenu.add(addBook);
+        addMenu.add(addBooks);
+
+        setMenu.add(setToRead);
+        rateMenu.add(rate);
+
+        printMenu.add(getBooksByReadStatus);
+        printMenu.add(getBooksByAuthor);
+        printMenu.add(getBooksByTitle);
+
+        suggestMenu.add(suggestRead);
+        helpMenu.add(help);
+
         menuBar.add(searchMenu);
-
+        menuBar.add(addMenu);
+        menuBar.add(setMenu);
+        menuBar.add(rateMenu);
+        menuBar.add(printMenu);
+        menuBar.add(suggestMenu);
+        menuBar.add(helpMenu);
 
         frame.setJMenuBar(menuBar);
-
-        // TODO: other commands
     }
 
     public static void initTextField(JSplitPane splitPane) throws IllegalArgumentException {
@@ -72,6 +185,7 @@ public class MyLibraryGUI {
             public void actionPerformed(ActionEvent e) {
                 // retrieve input
                 String input = inputField.getText();
+                String[] inputList;
 
                 // TODO: perform input validation
                 switch(op) {
@@ -89,14 +203,67 @@ public class MyLibraryGUI {
                         } break;
                     case SEARCH_RATING:
                         try {
-                            textArea.setText(dumpBooks(controller.searchRating(Integer.valueOf(input))));
+                            int rating = Integer.parseInt(input);
+                            if (rating < 1) rating = 1;
+                            if (rating > 5) rating = 5;
+                            textArea.setText(dumpBooks(controller.searchRating(rating)));
                         } catch (NoSuchBookException f) {
                             textArea.setText("No such book exists!");
+                        } break;
+                    case ADD_BOOK:
+                        inputList = inputField.getText().split(", ");
+                        // input validation
+                        if (inputList.length == 2) {
+                            controller.addBook(inputList[0],inputList[1]);
+                        } else {
+                            textArea.setText("Invalid argument input for given command.\n");
+                        }
+                        break;
+                    case ADD_BOOKS:
+                        try {
+                            controller.addBooks(input);
+                            textArea.setText("File added successfully.");
+                        } catch (FileNotFoundException f) {
+                            textArea.setText("File not found. Try again!");
+                        } break;
+                    case SET_TO_READ:
+                        try {
+                            controller.setToRead(input);
+                            textArea.setText("Book successfully updated");
+                        } catch (NoSuchBookException f) {
+                            textArea.setText("No such book exists!");
+                        } break;
+                    case RATE:
+                        inputList = inputField.getText().split(", ");
+                        // input validation
+                        if (inputList.length == 2) {
+                            int rating = Integer.parseInt(inputList[1]);
+                            if (rating < 1) rating = 1;
+                            if (rating > 5) rating = 5;
+                            try {
+                                controller.rate(inputList[0], rating);
+                            } catch (NoSuchBookException f) {
+                                textArea.setText("No such book exists!");
+                            }
+                        } else {
+                            textArea.setText("Invalid argument input for given command.\n");
+                        } break;
+                    case GET_BOOKS_BY_READ_STATUS:
+                        if (!input.equals("unread") && !input.equals("read")) {
+                            textArea.setText("Invalid argument input for given command. Please input 'read' or 'unread'");
+                        } else {
+                            try {
+                                textArea.setText(dumpBooks(controller.getBooks(input)));
+                            } catch (NoSuchBookException f) {
+                                textArea.setText("No such book exists!");
+                            }
                         } break;
                     default:
                         System.out.println("Please click on an option");
                         break;
                 }
+
+                inputField.setText("");
             }
         });
         splitPane.add(inputField);
@@ -132,7 +299,10 @@ public class MyLibraryGUI {
 
         // print the rating if it exists
         int rating = book.getRating();
-        if (rating > 0) output += "| Rating       : " + String.valueOf(rating);
+        if (rating > 0) {
+            output += "| Rating       : " + String.valueOf(rating);
+            output += "\n";
+        }
         output += "+" + "-".repeat(59);
         output += "\n";
 
@@ -144,8 +314,6 @@ public class MyLibraryGUI {
         LibraryModel model = new LibraryModel();
         controller = new LibraryController(model);
 
-        controller.addBooks("books.txt");
-
         // initialize jframe
         JFrame frame = new JFrame("My Library");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -155,7 +323,7 @@ public class MyLibraryGUI {
         // make the menu
         makeMenu(frame);
 
-        // create a horizonatl split
+        // create a vertical split
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
         splitPane.setDividerLocation(50);
 
@@ -164,8 +332,10 @@ public class MyLibraryGUI {
 
         // initialize the text area
         textArea = new JTextArea();
-        textArea.setText("hello world");
-        splitPane.add(textArea);
+        textArea.setText("Books will be displayed here...");
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        splitPane.add(scrollPane);
 
         frame.add(splitPane);
 

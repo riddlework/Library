@@ -4,6 +4,7 @@
  * Course: CSC 335
  * Description: Implements the View portion of the MVC Design pattern
  */
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -91,16 +92,27 @@ public class MyLibrary {
 			if (input[0].equals("addBook") && len == 3)  {
 				controller.addBook(input[1], input[2]);
 			} else if (input[0].equals("addBooks") && len == 2) {
-				controller.addBooks(input[1]);
+				try {
+					controller.addBooks(input[1]);
+				}
+				// throw this if the file is not found
+				catch (FileNotFoundException e) {
+					System.out.println("| File not found. Try again!");
+				}
+
 			} else if (input[0].equals("getBooks") && len == 2) {
 				dumpBooks(controller.getBooks(input[1]));
 			} else if (input[0].equals("rate") && len == 3) {
-				controller.rate(input[1], Integer.parseInt(input[2]));
+				int rating = Integer.parseInt(input[2]);
+				if (rating < 1) rating = 1;
+				if (rating > 5) rating = 5;
+				controller.rate(input[1], rating);
 			} else if (input[0].equals("search") && len == 3) {
-				if (input[1].equals("rating")
-						&& (0 < Integer.parseInt(input[2]))
-						&& (6 > Integer.parseInt(input[2]))) {
-					dumpBooks(controller.searchRating(Integer.parseInt(input[2])));
+				if (input[1].equals("rating")) {
+					int rating = Integer.parseInt(input[2]);
+					if (rating < 1) rating = 1;
+					if (rating > 5) rating = 5;
+					dumpBooks(controller.searchRating(rating));
 				} else if (input[1].equals("title")) {
 					dumpBook(controller.searchTitle(input[2]));
 				} else if (input[1].equals("author")) {
