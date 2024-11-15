@@ -34,7 +34,7 @@ public class MyLibraryGUI {
         addMenu = new JMenu("Add");
         setMenu = new JMenu("Set");
         rateMenu = new JMenu("Rate");
-        printMenu = new JMenu("Print");
+        printMenu = new JMenu("Get Books");
         suggestMenu = new JMenu("Suggest");
         helpMenu = new JMenu("Help");
 
@@ -142,9 +142,12 @@ public class MyLibraryGUI {
             public void actionPerformed(ActionEvent e) {
                 inputField.setText("...");
                 String output = '+' + "-".repeat(100);
+                output += "\n";
                 output += "If a command requires multiple arguments, please provide them in the following form:\n" +
                         "argument1, argument2.\n";
                 output += "Please note that book names and authors are case-sensitive.\n";
+                output += '+' + "-".repeat(100);
+                textArea.setText(output);
             }
         });
 
@@ -242,6 +245,7 @@ public class MyLibraryGUI {
                             if (rating > 5) rating = 5;
                             try {
                                 controller.rate(inputList[0], rating);
+                                textArea.setText("Book successfully rated.");
                             } catch (NoSuchBookException f) {
                                 textArea.setText("No such book exists!");
                             }
