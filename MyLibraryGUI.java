@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 public class MyLibraryGUI {
     private static JTextField inputField;
+    private static LibraryController controller;
 
     public static void makeMenu(JFrame frame) {
         JMenuBar menuBar = new JMenuBar();
@@ -45,7 +46,24 @@ public class MyLibraryGUI {
         // TODO: other commands
     }
 
+    public static String initTextField(JFrame frame) {
+        inputField = new JTextField("Input text here");
+        inputField.setColumns(20);
+        
+        inputField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        frame.add(inputField);
+
+
+    }
+
     public static void main(String[] args) {
+        // initialize objects
+        LibraryModel model = new LibraryModel();
+        controller = new LibraryController(model);
+
         // initialize jframe
         JFrame frame = new JFrame("My Library");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -56,9 +74,8 @@ public class MyLibraryGUI {
         makeMenu(frame);
 
         // initialize the text field
-        inputField = new JTextField("Input text here");
-        inputField.setColumns(20);
-        frame.add(inputField);
+        initTextField(frame);
+
 
         frame.setVisible(true);
     }
