@@ -23,8 +23,6 @@ public class MyLibraryGUI {
 
     private static Operation op;
 
-    // TODO: method to reset gui elements
-
     public static void makeMenu(JFrame frame) {
         JMenuBar menuBar = new JMenuBar();
 
